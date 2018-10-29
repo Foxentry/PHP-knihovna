@@ -1,0 +1,24 @@
+{
+    "name": "foxtmtest/foxtmtest",
+    "description": "foxtmtest",
+    "keywords": ["foxtmtest"],
+    "license": "DBAD",
+    "authors": [
+        {
+            "name": "Tomáš Mrázko",
+            "email": "info@tomasmrazko.sk"
+        }
+    ],
+    "type": "project",
+    "require": {
+		"php": ">=5.4"
+    },
+	"require-dev": {
+
+    },
+	"autoload": {
+        "psr-4": {
+            "foxtmtest\\foxtmtest\\": "src/"
+        }
+    }
+}
