@@ -2,7 +2,7 @@
     "name": "foxtmtest/foxtmtest",
     "description": "foxtmtest",
     "keywords": ["foxtmtest"],
-    "license": "DBAD",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Tomáš Mrázko",
