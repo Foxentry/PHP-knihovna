@@ -17,9 +17,6 @@
 
     },    
 	"autoload": {
-        "psr-4": {
-            "foxtmtest\\foxtmtest\\": "src/"
-        },
         "classmap": ["src"]
     }
 }
