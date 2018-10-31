@@ -1,7 +1,8 @@
 <?php
-echo "test"; 
-namespace Foxentry\Request 
-class Request{
+ 
+namespace Foxentry\Foxentry;
+echo "test";
+class request{
      
     private $requestOptions;
     private $requestQuery;
