@@ -20,6 +20,6 @@
         "psr-4": {
             "foxtmtest\\foxtmtest\\": "src/"
         },
-        "classmap": ["foxtmtest/foxtmtext/src"]
+        "classmap": ["src"]
     }
 }
