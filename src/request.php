@@ -1,6 +1,6 @@
 <?php
  
-namespace Foxentry;
+namespace Foxentry\Foxentry;
 echo "test";
 class request{
      
