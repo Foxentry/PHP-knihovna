@@ -1,7 +1,7 @@
 <?php 
 
 namespace foxtmtest/foxtmtest;
-
+echo "TEST";
 class request{
      
     private $type = "POST";
