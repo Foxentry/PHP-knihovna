@@ -1,6 +1,8 @@
-<?php
-
-class Base
+<?php                             
+echo "base";
+namespace foxtmtest\foxtmtest\base
+echo "base";
+class base
 { // BEGIN class Base
 	
     function parseJson($json)

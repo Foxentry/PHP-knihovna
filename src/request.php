@@ -1,6 +1,6 @@
 <?php
 echo "test"; 
-namespace foxtmtest\foxtmtest 
+namespace Foxentry\Request 
 class Request{
      
     private $requestOptions;

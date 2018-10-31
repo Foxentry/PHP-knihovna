@@ -1,6 +1,6 @@
 <?php
-
-class Curl
+namespace foxtmtest\foxtmtest\curl
+class curl
 { // BEGIN class Curl
 
 	private $timeout = 5;
