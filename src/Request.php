@@ -1,6 +1,6 @@
 <?php
 
-namespace foxtmtest;
+namespace Foxentry;
 echo "testy";
 class Request
 { // BEGIN class Foxentry
