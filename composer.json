@@ -17,6 +17,8 @@
 
     },    
 	"autoload": {
-        "classmap": ["src"]
+        "psr-4": {
+            "Foxentry\\": "src/"
+        }
     }
 }
