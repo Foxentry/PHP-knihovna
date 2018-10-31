@@ -2,11 +2,11 @@
 
 namespace foxtmtest;
 echo "testy";
-class Foxentry
+class Request
 { // BEGIN class Foxentry
 	
       
     
 } // END class Foxentry
-
+echo "jjj";
 ?>
