@@ -6,6 +6,11 @@ class Curl
 	private $timeout = 5;
     private $apiUrl = "https://dev.api.foxentry.cz/v1/";
     
+    function __construct()
+    { // BEGIN function __construct
+    	$this->base   = new Base();
+    } // END function __construct
+    
     function run($endpoint, $postData)
     { // BEGIN function run
         try {
@@ -15,6 +20,7 @@ class Curl
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_HEADER, FALSE);
             curl_setopt($ch, CURLOPT_POST, TRUE);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
             
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData, JSON_UNESCAPED_UNICODE));
     
@@ -25,11 +31,19 @@ class Curl
             $response = curl_exec($ch);
             curl_close($ch);
     
-            $resp = json_decode($response);
-            print_r($resp);
+            $resp = $this->base->parseJson($response);
+            
+            if (is_null($resp)) {
+                throw new \Exception("API response not JSON.");	
+            }
+            else {
+                return $resp;	
+            }
         } 
         catch (\Exception $e) {
-            var_dump($e);
+            return (object)array(
+                "error" => $e->getMessage()
+            );
         }
     } // END function run
     

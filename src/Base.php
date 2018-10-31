@@ -1,7 +1,7 @@
 <?php                             
-echo "base";
+
 namespace Foxentry;
-echo "base2";
+
 class Base
 { // BEGIN class Base
 	
