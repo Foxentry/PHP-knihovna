@@ -35,3 +35,36 @@ Niektoré funkcionality API umožňujú prácu s CZ alebo s SK údajmi. Jedná s
 $foxentry->setRequestCountry("CZ");
 ```
 
+### Stránkovanie výstupu
+Niektoré funkcionality (vyhľadávanie údajov) umožňujú stránkovať výsledky. Na nastavenie počtu výsledkov a ich stránkovanie slúži metóda **setPagination**
+```php
+$foxentry->setPagination(20, 0);
+```
+(obmedzí výsledky na prvých 20 výsledkov, 20 je teda limit a 0 je offset)
+
+## Nastavenie požiadavky
+Každá požiadavka na API musí obsahovať údaje, na základe ktorých API rozpozná, o aké údaje máte záujem.
+
+### Nastavenie koncového bodu API
+Každá funkcionalita má pridelený svoj REST API koncový bod, ktorý nastavíte pomocou metódy **setEndpoint**.
+
+```php
+$foxentry->setEndpoint("email/validate");
+```
+
+### Nastavenie tela požiadavky
+V rámci tela požiadavky je potrebné zadať dotaz, teda údaj alebo údaje, ktoré chcete spracovať/zvalidovať. Telo požiadavky sa u každého koncového bodu líši, podrobnosti nájdete v [REST API dokumentácii](https://foxentry.docs.apiary.io).
+
+Telo požiadavky nastavíte pomocou metódy **setRequestQuery**.
+```php
+$foxentry->setEndpoint(
+  array(
+    "email" => "info@foxentry.cz"
+  )
+);
+```
+
+
+
+
+
