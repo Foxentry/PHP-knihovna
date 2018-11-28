@@ -10,6 +10,10 @@ Knižnicu nainštalujte pomocou príkazu:
 ```
 composer install foxentry/foxentry
 ```
+Následne musíte knižnicu načítať do svojho PHP súboru pomocou:
+```
+require 'vendor/autoload.php';
+```
 
 ## Inštalácia bez composeru
 Stiahnite si obsah knižnice a do svojho PHP súbor načítajte súbor **src/Foxentry.php**
@@ -64,7 +68,20 @@ $foxentry->setEndpoint(
 );
 ```
 
+## Ukážkové príklady použitia API
+Nižšie sú uvedené príklady použitia tejto knižnice. Ďalšie nájdete v priečinku **examples**.
 
+### Validácia emailovej adresy
+```php
+$api = new Foxentry\Foxentry;
+$api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
+
+$api->email->setValidationType("basic"); // nastavenie typu validácie (basic/extended)
+$api->email->validate("info@foxentry.cz"); // nastavenie emailovej adresy, ktorú chcete zvalidovať
+
+$validationResult = $api->getResult(); // vráti výsledok validácie (object)
+$creditsUsage     = $api->getCreditsUsage(); // vráti informáciu o stave kreditov pred a po požiadavke	
+```
 
 
 
