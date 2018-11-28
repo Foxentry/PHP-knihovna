@@ -74,10 +74,12 @@ $foxentry->setRequestQuery(
 );
 ```
 
-### Pomocné metódy
-Pre zjednodušenie práce s API obsahuje knižnica aj niekoľko pomocných metód, pomocou ktorých si uľahčíte písanie kódu. 
+## Ukážkové príklady použitia API
+Nižšie sú uvedené príklady použitia tejto knižnice. Ďalšie nájdete v priečinku **examples**.
 
-Napríklad u validácie emailových adries je možné použiť tento kód:
+### Validácia emailovej adresy
+Pre validáciu emailovej adresy použite metódu **$api->email->validate**, ktorej prvý parameter musí obsahovať validovaný údaj (teda emailovú adresu, resp. reťazec, u ktorého chcete zistiť, či je validnou emailovou adresou) a druhý parameter obsahuje typ (spôsob) validácie (basic - základná, extended - rozšírená)
+
 ```php
 $api = new Foxentry\Foxentry;
 $api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
@@ -88,20 +90,7 @@ $validationResult = $api->getResult(); // vráti výsledok validácie (object)
 $creditsUsage     = $api->getCreditsUsage(); // vráti informáciu o stave kreditov pred a po požiadavke	
 ```
 
-## Ukážkové príklady použitia API
-Nižšie sú uvedené príklady použitia tejto knižnice. Ďalšie nájdete v priečinku **examples**.
 
-### Validácia emailovej adresy (bez pomocných metód)
-```php
-$api = new Foxentry\Foxentry;
-$api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
-
-$api->email->setValidationType("basic"); // nastavenie typu validácie (basic/extended)
-$api->email->validate("info@foxentry.cz"); // nastavenie emailovej adresy, ktorú chcete zvalidovať
-
-$validationResult = $api->getResult(); // vráti výsledok validácie (object)
-$creditsUsage     = $api->getCreditsUsage(); // vráti informáciu o stave kreditov pred a po požiadavke	
-```
 
 
 
