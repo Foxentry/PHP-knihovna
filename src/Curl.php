@@ -16,6 +16,7 @@ class Curl
         try {
             $ch = curl_init();
 
+            var_dump($this->apiUrl.$endpoint);
             curl_setopt($ch, CURLOPT_URL, $this->apiUrl.$endpoint);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -29,6 +30,7 @@ class Curl
             ));
     
             $response = curl_exec($ch);
+            //var_dump($response);
             curl_close($ch);
     
             $resp = $this->base->parseJson($response);
