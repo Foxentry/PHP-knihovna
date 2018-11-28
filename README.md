@@ -56,22 +56,42 @@ Každá funkcionalita má pridelený svoj REST API koncový bod, ktorý nastaví
 $foxentry->setEndpoint("email/validate");
 ```
 
+### Nastavenie rôznych parametrov požiadavky
+Umožňuje nastaviť požiadavke rôzne parametre, ktoré majú vplyv na spracovanie požiadavky a jej výstup. Napr. u validácie emailových adries a telefónnych čísiel je možné nastaviť typ validácie (basic - základná, extended - rozšírená).
+```
+$foxentry->setRequestOption("validationType", "basic");
+```
+
 ### Nastavenie tela požiadavky
 V rámci tela požiadavky je potrebné zadať dotaz, teda údaj alebo údaje, ktoré chcete spracovať/zvalidovať. Telo požiadavky sa u každého koncového bodu líši, podrobnosti nájdete v [REST API dokumentácii](https://foxentry.docs.apiary.io).
 
 Telo požiadavky nastavíte pomocou metódy **setRequestQuery**.
 ```php
-$foxentry->setEndpoint(
+$foxentry->setRequestQuery(
   array(
     "email" => "info@foxentry.cz"
   )
 );
 ```
 
+### Pomocné metódy
+Pre zjednodušenie práce s API obsahuje knižnica aj niekoľko pomocných metód, pomocou ktorých si uľahčíte písanie kódu. 
+
+Napríklad u validácie emailových adries je možné použiť tento kód:
+```php
+$api = new Foxentry\Foxentry;
+$api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
+
+$api->email->validate("info@foxentry.cz", "basic"); // nastavenie emailovej adresy, ktorú chcete zvalidovať
+
+$validationResult = $api->getResult(); // vráti výsledok validácie (object)
+$creditsUsage     = $api->getCreditsUsage(); // vráti informáciu o stave kreditov pred a po požiadavke	
+```
+
 ## Ukážkové príklady použitia API
 Nižšie sú uvedené príklady použitia tejto knižnice. Ďalšie nájdete v priečinku **examples**.
 
-### Validácia emailovej adresy
+### Validácia emailovej adresy (bez pomocných metód)
 ```php
 $api = new Foxentry\Foxentry;
 $api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
