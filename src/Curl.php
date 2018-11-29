@@ -21,7 +21,7 @@ class Curl
         try {
             $ch = curl_init();
 
-            var_dump($this->apiUrl.$endpoint);
+            //var_dump($this->apiUrl.$endpoint);
             curl_setopt($ch, CURLOPT_URL, $this->apiUrl.$endpoint);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_HEADER, FALSE);
