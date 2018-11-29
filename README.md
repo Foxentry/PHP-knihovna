@@ -90,7 +90,9 @@ Formát výstupu sa líši podľa použitého koncového bodu API a môže to by
 
 ### Získanie počtu použitých kreditov
 Väčšina API požiadaviek spotrebúva Foxentry kredity, ktoré máte vo svojom projekte. Po každej API požiadavke je možné získať informáciu, koľko kreditov daná požiadavka spotrebovala. Zároveň dostanete informáciu, koľko kreditov ste mali v projekte pred a po požiadavke.
-
+```php
+$creditsUsage = $api->getCreditsUsage();
+```
 
 ## Ukážkové príklady použitia API
 Nižšie sú uvedené príklady použitia tejto knižnice. Ďalšie nájdete v priečinku **examples**. Pre vyššiu prehľadnosť nie sú nižšie uvádzané všeobecné časti kódu (inicializácia knižnice, nastavenie API kľúča, získanie odpovede od API a podobne).
