@@ -116,9 +116,12 @@ V prípade, ak nemáte tel. číslo rozdelené na predvoľbu a samotné číslo 
 ```php
 $api->phone->validate("", "+420607123456", "basic"); // prázdna hodnota predvoľby, celé tel. číslo, typ validácie
 ```
+### Práca s našeptávačom/validátorom adresných bodov
+
+Pri práci s databázou adries je možné pri vyhľadávaní v niektorých prípadoch nastaviť tzv. vyhľadávacie módy. [Bližšie informácie o vyhľadávacích módoch](https://foxentry.docs.apiary.io/#introduction/vyhladavacie-mody).
 
 ### Našeptávanie adresných bodov
-Umožňuje využiť Foxentry algoritmus našeptávača adresných bodov. Stačí zadať typ vyhľadávania (čo hľadáte, napr. ulicu s číslom) a samotný dotaz (text, ktorý má výsledný adresný bod obsahovať v názve ulice).
+Umožňuje využiť Foxentry algoritmus našeptávača adresných bodov. Stačí zadať typ vyhľadávania (čo hľadáte, napr. ulicu s číslom) a samotný dotaz (text, ktorý má výsledný adresný bod obsahovať v názve ulice). Nepodporuje vyhľadávacie módy.
 
 ```php
 $api->address->hint(
@@ -133,8 +136,44 @@ Táto požiadavka na API vráti v prvom rade vyhovujúce ulice (ulice v Prahe so
 
 Dôležitý je parameter searchType, ten určuje v prvom rade typ údajov, ktoré sa vyhľadávajú, vo vyššie uvedenom prípade sa vyhľadávajú ulice (napr. Václavská) a ulice s číslom (napr. Václavská 1). Od tohto parametru závisí aj formát výstupu (obsiahnuté údaje vo výstupe).
 
+### Vyhľadávanie adresných bodov
+Narozdiel od našeptávania adresných bodov (vyššie) toto vyhľadávanie nevyužíva žiaden špeciálny interný algoritmus vyhľadávania a radenia výsledkov, ale iba jednoducho vráti vyhovujúce adresné body.
+
+```php
+$api->setEndpoint("locations/points/search");
+
+// limit results to only address points in city with exact name "Praha"
+$api->addQueryParam(
+    array(
+        "searchModes" => array("match"),
+        "key" => "city.name",
+        "value" => "Praha"
+    )
+);   
+
+// limit results to only address points with exact street name "Vác" or street name starting with "Vác"
+$api->addQueryParam(
+    array(
+        "searchModes" => array("match", "prefix"),
+        "key" => "street.name",
+        "value" => "Vác"
+    )
+);  
+
+// limit results to only address points with exact ZIP "11000"
+$api->addQueryParam(
+    array(
+        "searchModes" => array("match"),
+        "key" => "zip",
+        "value" => "11000"
+    )
+);      
+
+$api->run();
+```
+
 ### Vyhľadávanie ulíc
-Okrem vyššie uvedeného našeptávača adresných bodov, ktorý funguje na určitom internom Foxentry algoritme, je možné vyhľadávania iba priamo konkrétne typy údajov, napr. iba ulice alebo iba mestá. Pri vyhľadávaní je potrebné zvoliť u každého údaju tzv. vyhľadávací mód. [Bližšie informácie o vyhľadávacích módoch](https://foxentry.docs.apiary.io/#introduction/vyhladavacie-mody).
+API umožňuje vyhľadávať aj samostatné ulice (teda nie priamo adresné body). Nižšie uvedených príklad vráti zoznam ulíc v meste Praha, ktoré sa zhodujú alebo začínajú textom "Václ".
 
 ```php
 // limit results to streets
@@ -158,10 +197,38 @@ $api->addQueryParam(
     )
 );      
 
-
-$api->setPagination(10, 0);
 $api->run();
 ```
 
 
+### Vyhľadávanie miest
+API umožňuje vyhľadávať aj samostatné mestá (teda nie priamo adresné body). Nižšie uvedených príklad vráti zoznam miest, ktorých názov s sa zhoduje alebo začína textom "Pra". Dôležitý filtračný parameter je "type", ktorý umožňuje nastaviť jeden alebo viacero typov adresných prvkov, v ktorých sa má vyhľadávať:
+
+- **city** - názvy miest
+- **cityPart** - názvy častí miest
+- **cityDistrict** - názvy mestských obvodov
+
+```php
+// limit results to streets
+$api->setEndpoint("locations/cities/search");
+
+// limit results to only cities, excluding city parts and city districts
+$api->addQueryParam(
+    array(
+        "key" => "type",
+        "value" => array("city")
+    )
+); 
+
+// limit results to streets in city with name "Praha" (match)
+$api->addQueryParam(
+    array(
+        "searchModes" => array("match", "prefix"),
+        "key" => "city.name",
+        "value" => "Pra"
+    )
+);     
+
+$api->run();
+```
 
