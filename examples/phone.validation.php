@@ -8,10 +8,13 @@ require '../vendor/autoload.php';
 $api = new Foxentry\Foxentry;
 $api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
 
-$api->phone->setValidationType("extended");
-$api->phone->validate("607123456", "+420"); // alternatively enter full number as first parameter (+420607123456)
+$api->phone->validate("+420", "607123456", "extended"); // international prefix, phone number, validationType
 
-$validationResult = $api->getResult();
+// alternatively, (if you do not have prefix and number separately), leave first parameter empty (empty string or null) and enter full number as second parameter
+// $api->phone->validate(null, "+420607123456", "extended");
+
+
+$validationResult = $api->getResults();
 $creditsUsage     = $api->getCreditsUsage();	
 
 print_r($validationResult);

@@ -8,25 +8,10 @@ require '../vendor/autoload.php';
 $api = new Foxentry\Foxentry;
 $api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
 
-$api->name->setQuery(array(
-    "name" => array(
-        "value" => "Honza"
-    ),
-    "surname" => array(
-        "value" => "Novák"
-    ),
-    "nameSurname" => array(
-        "value" => "Martin Nováková"
-    )
-));
+$api->name->validateName("Petr");
 
-$api->name->validate();
-
-$validationResult = $api->getResult();
+$validationResult = $api->getResults();
 $creditsUsage     = $api->getCreditsUsage();	
-
-print_r($validationResult);
-print_r($creditsUsage);
 
 // RESULTS PRINT
 if ($validationResult->name->valid) {
@@ -34,20 +19,6 @@ if ($validationResult->name->valid) {
 }
 else {
 	echo "Name is invalid.<br>\n";
-}
-
-if ($validationResult->surname->valid) {
-	echo "Surname is valid.<br>\n";
-}
-else {
-	echo "Surname is invalid.<br>\n";
-}
-
-if ($validationResult->nameSurname->valid) {
-	echo "Name and surname combination is valid.<br>\n";
-}
-else {
-	echo "Name and surname combination is invalid.<br>\n";
 }
 
 ?>

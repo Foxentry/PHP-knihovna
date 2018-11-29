@@ -8,19 +8,17 @@ require '../vendor/autoload.php';
 $api = new Foxentry\Foxentry;
 $api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
 
-$api->email->validate("info@foxentry.cz", "basic");
+$api->name->validateSurname("Novák");
 
 $validationResult = $api->getResults();
 $creditsUsage     = $api->getCreditsUsage();	
 
-print_r($validationResult);
-print_r($creditsUsage);
-
-if ($validationResult->valid) {
-	echo "Email address is valid.";
+// RESULTS PRINT
+if ($validationResult->surname->valid) {
+	echo "Surname is valid.<br>\n";
 }
 else {
-	echo "Email address is invalid.";
+	echo "Surname is invalid.<br>\n";
 }
 
 ?>

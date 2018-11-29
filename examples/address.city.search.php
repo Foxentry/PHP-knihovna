@@ -7,23 +7,22 @@ require '../vendor/autoload.php';
 
 $api = new Foxentry\Foxentry;
 $api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
-$api->setEndpoint("locations/streets/search");
+$api->setEndpoint("locations/cities/search");
 
-// limit results to streets with name "Václ" (match) or with name starting with "Václ" (prefix)
+// limit results to only cities (possible to find also city parts (type = cityPart) or city districts (type = cityDistrict), multiple values allowed)  
 $api->addQueryParam(
     array(
-        "searchModes" => array("match", "prefix"),
-        "key" => "street.name",
-        "value" => "Václ"
+        "key" => "type",
+        "value" => array("city")
     )
-);
+); 
 
 // limit results to streets in city with name "Praha" (match)
 $api->addQueryParam(
     array(
-        "searchModes" => array("match"),
+        "searchModes" => array("match", "prefix"),
         "key" => "city.name",
-        "value" => "Praha"
+        "value" => "Pra"
     )
 );      
 

@@ -7,16 +7,14 @@ require '../vendor/autoload.php';
 
 $api = new Foxentry\Foxentry;
 $api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
-$api->setEndpoint("locations/search");
-$api->setRequestQuery(
+
+$api->address->hint(
     array(
-        "searchType" => "streetWithNumber",
-        "streetWithNumber" => "Jesen",
-        //"city" => "Praha", // you can limit street results by city (value "Praha" will limit results to only streets located in "Praha")
+        "searchType" => "streetWithNumber", // type of search, probably type of input which is end user filling
+        "streetWithNumber" => "Václav", // find streets or streets with numbers that has some type of match with string "Václav" (match, prefix, fulltext, fuzzy)
+        "city" => "Praha", // limit results to streets or streets with numbers located in city that has some type of match with string "Praha" (match, prefix, fulltext, fuzzy) 
     )
 ); 
-
-$api->run();
 
 $results      = $api->getResults();
 $creditsUsage = $api->getCreditsUsage();	

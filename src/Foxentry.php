@@ -9,61 +9,38 @@ class Foxentry extends Request
     { // BEGIN function __construct
         $this->base    = new Base;  
         $this->curl    = new Curl;
-    	//$this->request = new Request;
+        
+        $this->apiVersion = 1;
         $this->loadHelpers();
     } // END function __construct
-    /*
-    function setApiKey($apiKey)
-    { // BEGIN function setApiKey
-        $this->request->setApiKey($apiKey);
-    } // END function setApiKey
-    
-    function setRequestCountry($country)
-    { // BEGIN function setRequestCountry
-        $this->request->setRequestCountry($country);
-    } // END function setRequestCountry
 
-    function setPagination($limit = 20, $offset = 0)
-    { // BEGIN function setPagination
-        $this->request->setPagination("limits", array(
-            "results" => $limit,
-            "offset" => $offset
-        ));
-    } // END function setPagination    
-     */
+    function setApiVersion($version)
+    { // BEGIN function setApiVersion
+    	$this->apiVersion = $version;
+        $this->curl->setApiUrlByVersion($version);
+    } // END function setApiVersion
+
     function loadHelpers()
     { // BEGIN function loadHelpers
     	$this->address = new Address($this);
     	$this->email   = new Email($this);
     	$this->phone   = new Phone($this);
     	$this->name    = new Name($this);
+    	$this->company = new Company($this);
     } // END function loadHelpers
-    
-    function handleResponseError()
-    { // BEGIN function handleResponseError
-        $response = $this->getResponse();
-        throw new \Exception($response->error);
-    } // END function handleResponseError
 
     function getResults()
     { // BEGIN function getResults
         if (isset($this->response->data->results)) {
         	return $this->response->data->results;
+        }
+        else if (isset($this->response->data)) {
+        	return $this->response->data;
         }	
         else {
         	return array();
         }
     } // END function getResults
-    
-    function getResult()
-    { // BEGIN function getResult
-        if (isset($this->response->data)) {
-        	return $this->response->data;
-        }	
-        else {
-        	return null;
-        }	
-    } // END function getResult
     
     function getCreditsUsage()
     { // BEGIN function getCreditsUsage

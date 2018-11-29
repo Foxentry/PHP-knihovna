@@ -10,20 +10,39 @@ class Name extends Foxentry
         $this->request = $requester;
     } // END function __construct
     
-    function setQuery($query)
-    { // BEGIN function setQuery
-        $this->request->setRequestQuery($query);	
-    } // END function setQuery
+
+    function validateName($name)
+    { // BEGIN function validateName
+        $this->validate("name", $name);    
+    } // END function validateName
     
-    function validate()
+    function validateSurname($name)
+    { // BEGIN function validateSurname
+        $this->validate("surname", $name);    
+    } // END function validateSurname
+    
+    function validateNameSurname($name)
+    { // BEGIN function validateNameSurname
+        $this->validate("nameSurname", $name);    
+    } // END function validateNameSurname
+     
+    function validate($type, $value)
     { // BEGIN function validate
-        $this->request->setEndpoint("names/validate");
+        $this->request->setEndpoint("names/validate");	
+        $this->request->setRequestQuery(
+            array(
+                $type => array(
+                    "value" => $value
+                ),
+            )
+        );
+        
         $this->request->run();
         
         if ($this->request->errorResponse()) {
             $this->handleResponseError();
-        }
-    } // END function validate
+        }	
+    } // END function validate 
      
 } // END class Name
 

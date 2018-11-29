@@ -28,19 +28,20 @@ class request{
         $this->apiKey = $apiKey;
     } // END function setApiKey
 
-    function setOption($name, $value)
-    { // BEGIN function setOption
+    function setRequestOption($name, $value)
+    { // BEGIN function setRequestOption    
+        if (is_null($this->requestOptions)) { $this->requestOptions = new \stdClass(); }
         $this->requestOptions->$name = $value;
-    } // END function setOption
+    } // END function setRequestOption
 
     function setRequestCountry($country)
     { // BEGIN function setRequestCountry
-        $this->setOption("country", $country);
+        $this->setRequestOption("country", $country);
     } // END function setRequestCountry
 
     function setPagination($limit = 20, $offset = 0)
     { // BEGIN function setLimits
-        $this->setOption("limits", array(
+        $this->setRequestOption("limits", array(
             "results" => $limit,
             "offset" => $offset
         ));
@@ -62,6 +63,9 @@ class request{
 
     function getRequest()
     { // BEGIN function getRequest     
+        if (is_null($this->requestOptions)) {
+        	$this->requestOptions = array();
+        }
         $data = (object)array(
             "apiKey"  => $this->apiKey,
             "options" => $this->requestOptions,
@@ -84,9 +88,14 @@ class request{
     function run()
     { // BEGIN function run
         $request = $this->getRequest();
+        print_r($request);
         $this->validateRequest($request);
         
-        $this->response = $this->curl->run($this->endpoint, $request);
+        $this->response = $this->curl->run($this->apiVersion, $this->endpoint, $request);
+        
+        if ($this->errorResponse()) {
+            $this->handleResponseError();
+        }
     } // END function run
 
     function getResponse()
@@ -94,6 +103,11 @@ class request{
     	return $this->response;
     } // END function getResponse
     
+    function handleResponseError()
+    { // BEGIN function handleResponseError
+        $response = $this->getResponse();
+        throw new \Exception($response->error);
+    } // END function handleResponseError
     
     function errorResponse()
     { // BEGIN function errorResponse

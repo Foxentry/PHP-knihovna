@@ -11,7 +11,12 @@ class Curl
     	$this->base   = new Base();
     } // END function __construct
     
-    function run($endpoint, $postData)
+    function setApiUrlByVersion($apiVersion)
+    { // BEGIN function setApiUrlByVersion
+        $this->apiUrl = "https://dev.api.foxentry.cz/v$apiVersion/";	
+    } // END function setApiUrlByVersion
+    
+    function run($apiVersion, $endpoint, $postData)
     { // BEGIN function run
         try {
             $ch = curl_init();
@@ -34,6 +39,7 @@ class Curl
             curl_close($ch);
     
             $resp = $this->base->parseJson($response);
+            //var_dump($resp);
             
             if (is_null($resp)) {
                 throw new \Exception("API response not JSON.");	

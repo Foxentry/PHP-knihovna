@@ -8,15 +8,15 @@ require '../vendor/autoload.php';
 $api = new Foxentry\Foxentry;
 $api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
 
-$api->address->setQuery(array(
-    "streetWithNumber" => "Jeseniova 1151",  // alternatively split to "street" and "streetNumber" parameters
-    "city" => "Praha",
-    "zip" => "13000"
-));
+$api->address->validate(
+    array(
+      "streetWithNumber" => "Jeseniova 1151",  // alternatively split to "street" and "streetNumber" parameters
+      "city" => "Praha",
+      "zip" => "13000"
+    )
+);
 
-$api->address->validate();
-
-$validationResult = $api->getResult();
+$validationResult = $api->getResults();
 $creditsUsage     = $api->getCreditsUsage();	
 
 print_r($validationResult);

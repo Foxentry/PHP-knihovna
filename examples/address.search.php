@@ -7,23 +7,33 @@ require '../vendor/autoload.php';
 
 $api = new Foxentry\Foxentry;
 $api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
-$api->setEndpoint("locations/streets/search");
+$api->setEndpoint("locations/points/search");
 
-// limit results to streets with name "Václ" (match) or with name starting with "Václ" (prefix)
-$api->addQueryParam(
-    array(
-        "searchModes" => array("match", "prefix"),
-        "key" => "street.name",
-        "value" => "Václ"
-    )
-);
 
-// limit results to streets in city with name "Praha" (match)
+// limit results to only address points in city with exact name "Praha"
 $api->addQueryParam(
     array(
         "searchModes" => array("match"),
         "key" => "city.name",
         "value" => "Praha"
+    )
+);   
+
+// limit results to only address points with exact street name "Vác" or street name starting with "Vác"
+$api->addQueryParam(
+    array(
+        "searchModes" => array("match", "prefix"),
+        "key" => "street.name",
+        "value" => "Vác"
+    )
+);  
+
+// limit results to only address points with exact ZIP "11000"
+$api->addQueryParam(
+    array(
+        "searchModes" => array("match"),
+        "key" => "zip",
+        "value" => "11000"
     )
 );      
 
@@ -34,6 +44,7 @@ $api->run();
 $results      = $api->getResults();
 $creditsUsage = $api->getCreditsUsage();	
 
+echo "RESULTS FOUND: ".count($results)."\n";
 print_r($creditsUsage);
 print_r($results);
 

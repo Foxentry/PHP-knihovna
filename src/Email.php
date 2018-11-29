@@ -10,14 +10,10 @@ class Email extends Foxentry
         $this->request = $requester;
     } // END function __construct
     
-    function setValidationType($validationType = "basic")
-    { // BEGIN function setValidationType
-        $this->request->setOption("validationType", $validationType);	
-    } // END function setValidationType
-    
-    function validate($email)
-    { // BEGIN function validate
+    function validate($email, $validationType = "basic")
+    { // BEGIN function validate       
         $this->request->setEndpoint("email/validate");
+        $this->request->setRequestOption("validationType", $validationType);	
         $this->request->setRequestQuery(
             array(
                 "email" => $email,

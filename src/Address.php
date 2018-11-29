@@ -9,21 +9,21 @@ class Address extends Foxentry
     { // BEGIN function __construct
         $this->request = $requester;
     } // END function __construct
-    
-    function setRequestQuery($query)
-    { // BEGIN function setQuery
-        $this->request->setRequestQuery($query);	
-    } // END function setQuery
-    
-    function validate()
+
+    function validate($query)
     { // BEGIN function validate
         $this->request->setEndpoint("locations/validate");
+        $this->request->setRequestQuery($query);	
         $this->request->run();
-        
-        if ($this->request->errorResponse()) {
-            $this->handleResponseError();
-        }
     } // END function validate
+    
+    function hint($query)         
+    { // BEGIN function hint      
+        $this->request->setEndpoint("locations/search");
+        $this->request->setRequestQuery($query); 	
+        
+        $this->request->run();
+    } // END function hint
      
 } // END class Address
 
