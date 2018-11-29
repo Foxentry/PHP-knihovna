@@ -74,20 +74,32 @@ $foxentry->setRequestQuery(
 );
 ```
 
+### Odoslanie požiadavky na API
+Požiadavku na API je potrebné v niektorých prípadoch odoslať použitím metódy **run**.
+```php
+$foxentry->run();
+```
+Týka sa to hlavne prípadoch, keď pre prácu s API nepoužívate preddefinované metódy, ale vytvárate vlastnú požiadavku.
+
+### Získanie API odpovede
+Pre získanie odpovede od API je potrebné zavolať špeciálnu metódu, ktorá vráti objekt s odpoveďou od API servera.
+```php
+$validationResult = $api->getResults();
+```
+Formát výstupu sa líši podľa použitého koncového bodu API a môže to byť *object* (napr. v prípade validácie údaju) alebo *array* (napr. pri vyhľadávaní adresných bodov aleb firiem, kedy výstup obsahuje viac vyhovujúcich položiek).
+
+### Získanie počtu použitých kreditov
+Väčšina API požiadaviek spotrebúva Foxentry kredity, ktoré máte vo svojom projekte. Po každej API požiadavke je možné získať informáciu, koľko kreditov daná požiadavka spotrebovala. Zároveň dostanete informáciu, koľko kreditov ste mali v projekte pred a po požiadavke.
+
+
 ## Ukážkové príklady použitia API
-Nižšie sú uvedené príklady použitia tejto knižnice. Ďalšie nájdete v priečinku **examples**.
+Nižšie sú uvedené príklady použitia tejto knižnice. Ďalšie nájdete v priečinku **examples**. Pre vyššiu prehľadnosť nie sú nižšie uvádzané všeobecné časti kódu (inicializácia knižnice, nastavenie API kľúča, získanie odpovede od API a podobne).
 
 ### Validácia emailovej adresy
 Pre validáciu emailovej adresy použite metódu **$api->email->validate**, ktorej prvý parameter musí obsahovať validovaný údaj (teda emailovú adresu, resp. reťazec, u ktorého chcete zistiť, či je validnou emailovou adresou) a druhý parameter obsahuje typ (spôsob) validácie (basic - základná, extended - rozšírená)
 
 ```php
-$api = new Foxentry\Foxentry;
-$api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
-
 $api->email->validate("info@foxentry.cz", "basic"); // nastavenie emailovej adresy, ktorú chcete zvalidovať
-
-$validationResult = $api->getResult(); // vráti výsledok validácie (object)
-$creditsUsage     = $api->getCreditsUsage(); // vráti informáciu o stave kreditov pred a po požiadavke	
 ```
 ### Validácia telefónneho čísla
 Pre validáciu telefónneho čísla použite metódu **$api->phone->validate** s nasledovnými parametrami:
@@ -96,25 +108,13 @@ Pre validáciu telefónneho čísla použite metódu **$api->phone->validate** s
 - typ validácie (basic - základná, extended - rozšírená)
 
 ```php
-$api = new Foxentry\Foxentry;
-$api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
-
 $api->phone->validate("+420", "607123456", "basic"); // medz. predvoľba, tel. číslo, typ validácie
-
-$validationResult = $api->getResult(); // vráti výsledok validácie (object)
-$creditsUsage     = $api->getCreditsUsage(); // vráti informáciu o stave kreditov pred a po požiadavke	
 ```
 
 V prípade, ak nemáte tel. číslo rozdelené na predvoľbu a samotné číslo (napr. +420607123456), ponechajte prvý parameter (phonePrefix) prázdny ("" alebo null) a zadajte celé tel. číslo ako hodnotu druhého parametra (phoneNumber).
 
 ```php
-$api = new Foxentry\Foxentry;
-$api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
-
 $api->phone->validate("", "+420607123456", "basic"); // prázdna hodnota predvoľby, celé tel. číslo, typ validácie
-
-$validationResult = $api->getResult(); // vráti výsledok validácie (object)
-$creditsUsage     = $api->getCreditsUsage(); // vráti informáciu o stave kreditov pred a po požiadavke	
 ```
 
 
