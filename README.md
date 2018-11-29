@@ -79,7 +79,7 @@ Požiadavku na API je potrebné v niektorých prípadoch odoslať použitím met
 ```php
 $foxentry->run();
 ```
-Týka sa to hlavne prípadoch, keď pre prácu s API nepoužívate preddefinované metódy, ale vytvárate vlastnú požiadavku.
+Týka sa to hlavne prípadoch, keď pre prácu s API nepoužívate preddefinované metódy, ale vytvárate vlastnú požiadavku. Hlavne sa jedná o prípady, kedy sa na zadanie tela požiadavky používajú metódy *setRequestQuery* a *addQueryParam*. Využitie týchto metód nájdete v príkladoch nižšie alebo v ukážkových kódoch v priečinku **examples**.
 
 ### Získanie API odpovede
 Pre získanie odpovede od API je potrebné zavolať špeciálnu metódu, ktorá vráti objekt s odpoveďou od API servera.
