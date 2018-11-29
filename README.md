@@ -252,3 +252,25 @@ $api->address->validate(
 );
 ```
 Uvedený kód spustí validáciu, teda overenie, či existuje adresný bod na ulici "Jeseniova" s číslom "1151", v meste "Praha" a s PSČ "13000". V prípade, že áno, je možné cez metódu **getResults** možné získať detaily adresného bodu (všetky informácie, ktoré o ňom Foxentry má dispozícii).
+
+### Práca s databázou firiem
+
+#### Vyhľadávanie firiem
+Firmy je možné vyhľadať na základe ich názvu alebo ich IČ, pričom sa uprednostňujú výsledky s presnou alebo prefixovo zhodou. V prípade, že nie nájdených dostatočný počet vyhovujúcich výsledkov, doplnia sa (do požadovaného počtu výsledkov) výsledky s fuzzy zhodou.
+```php
+$api->company->search(
+    array(
+      "name" => "Web"
+    )
+);
+```
+
+#### Získanie informácií o firme
+API umožňuje získať základné informácie o firme na základe zadaného IČ.
+```php
+$api->company->get(
+    array(
+      "registrationNumber" => "06190570"
+    )
+);
+```
