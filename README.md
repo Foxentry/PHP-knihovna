@@ -117,6 +117,21 @@ V prípade, ak nemáte tel. číslo rozdelené na predvoľbu a samotné číslo 
 $api->phone->validate("", "+420607123456", "basic"); // prázdna hodnota predvoľby, celé tel. číslo, typ validácie
 ```
 
+### Našeptávanie adresných bodov
+Umožňuje využiť Foxentry algoritmus našeptávača adresných bodov. Stačí zadať typ vyhľadávania (čo hľadáte, napr. ulicu s číslom) a samotný dotaz (text, ktorý má výsledný adresný bod obsahovať v názve ulice).
+
+```php
+$api->address->hint(
+    array(
+        "searchType" => "streetWithNumber", // type of search, probably type of input which is end user filling
+        "streetWithNumber" => "Václav", // find streets or streets with numbers that has some type of match with string "Václav" (match, prefix, fulltext, fuzzy)
+        "city" => "Praha", // limit results to streets or streets with numbers located in city that has some type of match with string "Praha" (match, prefix, fulltext, fuzzy) 
+    )
+); 
+```
+Táto požiadavka na API vráti v prvom rade vyhovujúce ulice (ulice v Prahe so zhodou s dotazom "Václav"). Následne, ak je počet vyhovujúcich ulíc menší ako 10 (maximálny počet výsledkov), doplní zvyšok výsledkov konkrétnymi adresnými bodmi, ktoré sa nachádzajú v meste Praha na ulici so zhodou s dotazom "Václav".
+
+Dôležitý je parameter searchType, ten určuje v prvom rade typ údajov, ktoré sa vyhľadávajú, vo vyššie uvedenom prípade sa vyhľadávajú ulice (napr. Václavská) a ulice s číslom (napr. Václavská 1). Od tohto parametru závisí aj formát výstupu (obsiahnuté údaje vo výstupe).
 
 
 
