@@ -133,5 +133,35 @@ Táto požiadavka na API vráti v prvom rade vyhovujúce ulice (ulice v Prahe so
 
 Dôležitý je parameter searchType, ten určuje v prvom rade typ údajov, ktoré sa vyhľadávajú, vo vyššie uvedenom prípade sa vyhľadávajú ulice (napr. Václavská) a ulice s číslom (napr. Václavská 1). Od tohto parametru závisí aj formát výstupu (obsiahnuté údaje vo výstupe).
 
+### Vyhľadávanie ulíc
+Okrem vyššie uvedeného našeptávača adresných bodov, ktorý funguje na určitom internom Foxentry algoritme, je možné vyhľadávania iba priamo konkrétne typy údajov, napr. iba ulice alebo iba mestá. Pri vyhľadávaní je potrebné zvoliť u každého údaju tzv. vyhľadávací mód. [Bližšie informácie o vyhľadávacích módoch](https://foxentry.docs.apiary.io/#introduction/vyhladavacie-mody).
+
+```php
+// limit results to streets
+$api->setEndpoint("locations/streets/search");
+
+// limit results to streets with name "Václ" (match) or with name starting with "Václ" (prefix)
+$api->addQueryParam(
+    array(
+        "searchModes" => array("match", "prefix"),
+        "key" => "street.name",
+        "value" => "Václ"
+    )
+);
+
+// limit results to streets in city with name "Praha" (match)
+$api->addQueryParam(
+    array(
+        "searchModes" => array("match"),
+        "key" => "city.name",
+        "value" => "Praha"
+    )
+);      
+
+
+$api->setPagination(10, 0);
+$api->run();
+```
+
 
 
