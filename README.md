@@ -97,13 +97,16 @@ $creditsUsage = $api->getCreditsUsage();
 ## Ukážkové príklady použitia API
 Nižšie sú uvedené príklady použitia tejto knižnice. Ďalšie nájdete v priečinku **examples**. Pre vyššiu prehľadnosť nie sú nižšie uvádzané všeobecné časti kódu (inicializácia knižnice, nastavenie API kľúča, získanie odpovede od API a podobne).
 
-### Validácia emailovej adresy
+### Práca s emailovými adresami
+#### Validácia emailovej adresy
 Pre validáciu emailovej adresy použite metódu **$api->email->validate**, ktorej prvý parameter musí obsahovať validovaný údaj (teda emailovú adresu, resp. reťazec, u ktorého chcete zistiť, či je validnou emailovou adresou) a druhý parameter obsahuje typ (spôsob) validácie (basic - základná, extended - rozšírená)
 
 ```php
 $api->email->validate("info@foxentry.cz", "basic"); // nastavenie emailovej adresy, ktorú chcete zvalidovať
 ```
-### Validácia telefónneho čísla
+
+### Práca s telefónnymi číslami
+#### Validácia telefónneho čísla
 Pre validáciu telefónneho čísla použite metódu **$api->phone->validate** s nasledovnými parametrami:
 - phonePrefix (medzinárodná predvoľba tel. čísla, napr. +420)
 - phoneNumber (tel. číslo, napr. 607123456)
@@ -122,7 +125,7 @@ $api->phone->validate("", "+420607123456", "basic"); // prázdna hodnota predvo�
 
 Pri práci s databázou adries je možné pri vyhľadávaní v niektorých prípadoch nastaviť tzv. vyhľadávacie módy. [Bližšie informácie o vyhľadávacích módoch](https://foxentry.docs.apiary.io/#introduction/vyhladavacie-mody).
 
-### Našeptávanie adresných bodov
+#### Našeptávanie adresných bodov
 Umožňuje využiť Foxentry algoritmus našeptávača adresných bodov. Stačí zadať typ vyhľadávania (čo hľadáte, napr. ulicu s číslom) a samotný dotaz (text, ktorý má výsledný adresný bod obsahovať v názve ulice). Nepodporuje vyhľadávacie módy.
 
 ```php
@@ -138,7 +141,7 @@ Táto požiadavka na API vráti v prvom rade vyhovujúce ulice (ulice v Prahe so
 
 Dôležitý je parameter searchType, ten určuje v prvom rade typ údajov, ktoré sa vyhľadávajú, vo vyššie uvedenom prípade sa vyhľadávajú ulice (napr. Václavská) a ulice s číslom (napr. Václavská 1). Od tohto parametru závisí aj formát výstupu (obsiahnuté údaje vo výstupe).
 
-### Vyhľadávanie adresných bodov
+#### Vyhľadávanie adresných bodov
 Narozdiel od našeptávania adresných bodov (vyššie) toto vyhľadávanie nevyužíva žiaden špeciálny interný algoritmus vyhľadávania a radenia výsledkov, ale iba jednoducho vráti vyhovujúce adresné body.
 
 ```php
@@ -174,7 +177,7 @@ $api->addQueryParam(
 $api->run();
 ```
 
-### Vyhľadávanie ulíc
+#### Vyhľadávanie ulíc
 API umožňuje vyhľadávať aj samostatné ulice (teda nie priamo adresné body). Nižšie uvedených príklad vráti zoznam ulíc v meste Praha, ktoré sa zhodujú alebo začínajú textom "Václ".
 
 ```php
@@ -203,7 +206,7 @@ $api->run();
 ```
 
 
-### Vyhľadávanie miest
+#### Vyhľadávanie miest
 API umožňuje vyhľadávať aj samostatné mestá (teda nie priamo adresné body). Nižšie uvedených príklad vráti zoznam miest, ktorých názov s sa zhoduje alebo začína textom "Pra". Dôležitý filtračný parameter je "type", ktorý umožňuje nastaviť jeden alebo viacero typov adresných prvkov, v ktorých sa má vyhľadávať:
 
 - **city** - názvy miest
@@ -234,3 +237,16 @@ $api->addQueryParam(
 $api->run();
 ```
 
+#### Validácia adresného bodu
+Umožňuje zistiť, či existuje adresný bod, ktorý vyhovujeme zadaným kritériám (dopytu).
+
+```php
+$api->address->validate(
+    array(
+      "streetWithNumber" => "Jeseniova 1151",  // je možné rozdeliť na parametre street a number
+      "city" => "Praha",
+      "zip" => "13000"
+    )
+);
+```
+Uvedený kód spustí validáciu, teda overenie, či existuje adresný bod na ulici "Jeseniova" s číslom "1151", v meste "Praha" a s PSČ "13000". V prípade, že áno, je možné cez metódu **getResults** možné získať detaily adresného bodu (všetky informácie, ktoré o ňom Foxentry má dispozícii).
