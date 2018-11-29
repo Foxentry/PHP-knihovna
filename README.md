@@ -274,3 +274,28 @@ $api->company->get(
     )
 );
 ```
+
+### Práca s databázou mien a priezvisk
+
+#### Validácia mena
+```php
+$api->name->validateName("Petr");
+```
+
+#### Validácia priezviska
+```php
+$api->name->validateSurname("Novák");
+```
+
+#### Validácia mena a priezviska
+```php
+$api->name->validateSurname("Petr Novák");
+```
+
+
+
+
+
+
+
+
