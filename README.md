@@ -89,7 +89,33 @@ $api->email->validate("info@foxentry.cz", "basic"); // nastavenie emailovej adre
 $validationResult = $api->getResult(); // vráti výsledok validácie (object)
 $creditsUsage     = $api->getCreditsUsage(); // vráti informáciu o stave kreditov pred a po požiadavke	
 ```
+### Validácia telefónneho čísla
+Pre validáciu telefónneho čísla použite metódu **$api->phone->validate** s nasledovnými parametrami:
+- phonePrefix (medzinárodná predvoľba tel. čísla, napr. +420)
+- phoneNumber (tel. číslo, napr. 607123456)
+- typ validácie (basic - základná, extended - rozšírená)
 
+```php
+$api = new Foxentry\Foxentry;
+$api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
+
+$api->phone->validate("+420", "607123456", "basic"); // medz. predvoľba, tel. číslo, typ validácie
+
+$validationResult = $api->getResult(); // vráti výsledok validácie (object)
+$creditsUsage     = $api->getCreditsUsage(); // vráti informáciu o stave kreditov pred a po požiadavke	
+```
+
+V prípade, ak nemáte tel. číslo rozdelené na predvoľbu a samotné číslo (napr. +420607123456), ponechajte prvý parameter (phonePrefix) prázdny ("" alebo null) a zadajte celé tel. číslo ako hodnotu druhého parametra (phoneNumber).
+
+```php
+$api = new Foxentry\Foxentry;
+$api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
+
+$api->phone->validate("", "+420607123456", "basic"); // prázdna hodnota predvoľby, celé tel. číslo, typ validácie
+
+$validationResult = $api->getResult(); // vráti výsledok validácie (object)
+$creditsUsage     = $api->getCreditsUsage(); // vráti informáciu o stave kreditov pred a po požiadavke	
+```
 
 
 
