@@ -1,7 +1,7 @@
 {
-    "name": "foxtmtest/foxtmtest",
-    "description": "foxtmtest",
-    "keywords": ["foxtmtest"],
+    "name": "foxentry/foxentry",
+    "description": "Foxentry.cz PHP knihovna",
+    "keywords": ["Foxentry", "Foxentry.cz"],
     "license": "GPL-3.0-or-later",
     "authors": [
         {
