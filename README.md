@@ -32,7 +32,7 @@ $foxentry = new Foxentry\Foxentry;
 ### Nastavenie API kľúča
 Každá požiadavka na API musí obsahovať API kľúč pridelený k vášmu Foxentry projektu. 
 ```php
-$foxentry->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
+$foxentry->setApiKey("your-api-key");
 ```
 
 ### Nastavenie krajiny pre údaje
