@@ -289,7 +289,7 @@ $api->name->validateSurname("Novák");
 
 #### Validácia mena a priezviska
 ```php
-$api->name->validateSurname("Petr Novák");
+$api->name->validateNameSurname("Petr Novák");
 ```
 
 
