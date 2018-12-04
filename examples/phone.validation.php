@@ -6,7 +6,7 @@ ini_set("error_reporting", -1);
 require '../vendor/autoload.php';
 
 $api = new Foxentry\Foxentry;
-$api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
+$api->setApiKey("yourApiKey");
 
 $api->phone->validate("+420", "607123456", "extended"); // international prefix, phone number, validationType
 

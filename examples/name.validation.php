@@ -6,7 +6,7 @@ ini_set("error_reporting", -1);
 require '../vendor/autoload.php';
 
 $api = new Foxentry\Foxentry;
-$api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
+$api->setApiKey("yourApiKey");
 
 $api->name->validateName("Petr");
 

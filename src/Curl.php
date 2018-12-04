@@ -4,7 +4,7 @@ class Curl
 { // BEGIN class Curl
 
 	private $timeout = 5;
-    private $apiUrl = "https://dev.api.foxentry.cz/v1/";
+    private $apiUrl = "https://api.foxentry.cz/v1/";
     
     function __construct()
     { // BEGIN function __construct
@@ -13,7 +13,7 @@ class Curl
     
     function setApiUrlByVersion($apiVersion)
     { // BEGIN function setApiUrlByVersion
-        $this->apiUrl = "https://dev.api.foxentry.cz/v$apiVersion/";	
+        $this->apiUrl = "https://api.foxentry.cz/v$apiVersion/";	
     } // END function setApiUrlByVersion
     
     function run($apiVersion, $endpoint, $postData)

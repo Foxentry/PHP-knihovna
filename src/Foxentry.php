@@ -51,7 +51,7 @@ class Foxentry extends Request
         	return null;
         }		
     } // END function getCreditsUsage
-    
+
 } // END class Foxentry
 
 ?>

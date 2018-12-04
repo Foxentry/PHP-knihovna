@@ -6,7 +6,7 @@ ini_set("error_reporting", -1);
 require '../vendor/autoload.php';
 
 $api = new Foxentry\Foxentry;
-$api->setApiKey("fox-IcNXuaeXfcpaXncTmLFS");
+$api->setApiKey("yourApiKey");
 $api->setEndpoint("locations/streets/search");
 
 // limit results to streets with name "Václ" (match) or with name starting with "Václ" (prefix)

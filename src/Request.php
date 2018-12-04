@@ -88,7 +88,6 @@ class request{
     function run()
     { // BEGIN function run
         $request = $this->getRequest();
-        print_r($request);
         $this->validateRequest($request);
         
         $this->response = $this->curl->run($this->apiVersion, $this->endpoint, $request);
