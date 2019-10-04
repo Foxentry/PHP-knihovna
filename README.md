@@ -62,6 +62,15 @@ Umožňuje nastaviť požiadavke rôzne parametre, ktoré majú vplyv na spracov
 $foxentry->setRequestOption("validationType", "basic");
 ```
 
+### Nastavenie "dataInclude"
+U niektorých typov validátorov API nevracia všetky údaje automaticky, ale až na vyžiadanie. Poskytnutie informácií navyše je účtované v rámci tarifu ako požiadavka typu "Doplnení informací".
+
+```
+$foxentry->setRequestOption("dataInclude", array("vatPayer")); // API vráti v prípade validátora firiem okrem základných informácií o subjekte aj informáciu, či je subjekt platca DPH alebo tzv. identifikovaná osoba
+
+$foxentry->setRequestOption("dataInclude", array("carrier.name")); // API vráti v prípade validátora telefónnych čísiel okrem základných informácií o telefónnom čísle aj informáciu o mobilnom operátorovi, pod ktorého číslo patrí
+```
+
 ### Nastavenie tela požiadavky
 V rámci tela požiadavky je potrebné zadať dotaz, teda údaj alebo údaje, ktoré chcete spracovať/zvalidovať. Telo požiadavky sa u každého koncového bodu líši, podrobnosti nájdete v [REST API dokumentácii](https://foxentry.docs.apiary.io).
 
