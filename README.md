@@ -8,7 +8,7 @@ V prípade, že sa vám nedarí implementovať knižnicu do vášho webu alebo s
 Knižnicu nainštalujte pomocou príkazu:
 
 ```
-composer install foxentry/foxentry
+composer require foxentry/foxentry
 ```
 Následne musíte knižnicu načítať do svojho PHP súboru pomocou:
 ```
