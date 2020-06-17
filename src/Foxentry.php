@@ -1,6 +1,9 @@
 <?php
 
 namespace Foxentry;
+require_once dirname(__FILE__) . '/Request.php';
+require_once dirname(__FILE__) . '/Base.php';
+require_once dirname(__FILE__) . '/Curl.php';
 
 class Foxentry extends Request
 { // BEGIN class Foxentry
@@ -9,7 +12,12 @@ class Foxentry extends Request
     { // BEGIN function __construct
         $this->base    = new Base;  
         $this->curl    = new Curl;
-        
+
+        require_once dirname(__FILE__) . '/Address.php';
+        require_once dirname(__FILE__) . '/Email.php';
+        require_once dirname(__FILE__) . '/Phone.php';
+        require_once dirname(__FILE__) . '/Name.php';
+        require_once dirname(__FILE__) . '/Company.php';        
         $this->apiVersion = 1;
         $this->loadHelpers();
     } // END function __construct
