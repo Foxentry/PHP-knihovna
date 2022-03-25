@@ -2,8 +2,7 @@
  
 namespace Foxentry;
 
-class request{
-     
+class Request {     
     private $requestOptions;
     private $requestQuery;
     private $endpoint;
