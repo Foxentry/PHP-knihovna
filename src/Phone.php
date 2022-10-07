@@ -10,7 +10,7 @@ class Phone extends Foxentry
         $this->request = $requester;
     } // END function __construct
     
-    function validate($phonePrefix = null, $phoneNumber, $validationType = "basic")
+    function validate($phonePrefix = null, $phoneNumber = null, $validationType = "basic")
     { // BEGIN function validate                                     	
         $this->request->setEndpoint("phone/validate");
         $this->request->setRequestOption("validationType", $validationType);
