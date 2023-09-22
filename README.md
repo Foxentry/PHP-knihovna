@@ -1,6 +1,6 @@
 # Foxentry PHP API
 
-**///Tato knihovna již není aktuální.**
+**![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) `#f03c15` Tato knihovna již není aktuální. Pro přístup ke Foxentry API použijte [novou knihovnu](https://github.com/Foxentry/PHP-LIB/tree/main) určenou pro API verzi 2.0**
 
 Táto PHP knižnica určená pre Foxentry API umožňuje pristupovať k API veľmi jednoducho pomocou zopár riadkov kódu. Pre správne fungovanie potrebujete mať na serveri nainštalované PHP minimálne vo verzii 5.5 a aktivovanú curl funkcionalitu.
 
